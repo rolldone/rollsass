@@ -1,0 +1,336 @@
+
+/*
+ * rolless sass v0.1 alpha
+ * on development
+ * everything is component
+ */
+
+//reset tool for ul li
+@mixin reset_ul_li() {
+  background: none repeat scroll 0 0 transparent;
+  border: 0 none;
+  font-size: 100%;
+  margin: 0;
+  outline: 0 none;
+  padding: 0;
+  vertical-align: baseline;
+  list-style-type: none;
+}
+
+@mixin roll_max_screen($width){
+    @media screen and (max-width: $width) {
+        @content;
+    }
+}
+@mixin roll_row(){
+    display: table-row;
+}
+@mixin roll_column(){
+    display: table-cell;
+}
+
+@mixin roll_table($mode){
+    width: 100%;
+    height: auto;
+    display: table;
+    >*{
+        // child 
+        display: table-#{$mode};
+        @content;
+    }
+}
+@mixin roll_t_align($x,$y){
+    @if $x == 'center' and $y == 'center'{
+        vertical-align: middle;
+        text-align: center;
+    }
+    @else if $x == 'center' and $y == 'left'{
+        vertical-align: middle;
+        text-align: left;
+    }
+    @else if $x == 'center' and $y == 'right'{
+        vertical-align: middle;
+        text-align: right;
+    }
+    @else if $x == 'top' and $y == 'left'{
+        vertical-align: top;
+        text-align: left;
+    }
+    @else if $x == 'top' and $y == 'center'{
+        vertical-align: top;
+        text-align: center;
+    }
+    @else if $x == 'top' and $y == 'right'{
+        vertical-align: top;
+        text-align: right;
+    }
+    @else if $x == 'bottom' and $y == 'left'{
+        vertical-align: bottom;
+        text-align: left;
+    }
+    @else if $x == 'bottom' and $y == 'center'{
+        vertical-align: bottom;
+        text-align: center;
+    }
+    @else if $x == 'bottom' and $y == 'right'{
+        vertical-align: bottom;
+        text-align: right;
+    }
+    
+}
+
+@mixin roll_b_list(){
+    display: block;
+    width: 100%;
+    height: auto;
+    &:after{
+        content : ' ';
+        display: block;
+        clear: both;
+    }
+    > * {
+        @content;
+    }
+}
+
+@mixin roll_b_align($x){
+    @if $x == 'center' {
+        margin: 0 auto;
+    }
+    @else if $x == 'right'{
+        margin-left: auto;
+        margin-right: 0;
+    }
+    @else if $x == 'left'{
+        margin-left: 0;
+        margin-right: auto;
+    }
+}
+
+@mixin roll_b_item(){
+    display: block;
+    width: 100px;
+    height: auto;
+    
+}
+@mixin roll_ib_item(){
+    display: inline-block;
+    width: 100px;
+    height: auto;
+}
+
+@mixin roll_img(){
+    display: block;
+    box-sizing: border-box;
+    width: 50px;
+    height: 50px;
+    border-radius: 3px;
+    // cursor: pointer;
+    position: relative;
+    > *{
+        @content;
+    }
+}
+
+@mixin roll_img_item(){
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-position: center;
+}
+
+//NEW VERSION OBJECT ASPECT RATIO
+//BUTUH REQUIREMENT CHILDREN ABSOLUTE LAYOUT
+@mixin aspect_ratio(){
+    display: inline-block;
+    position: relative;
+    &:after{
+        @content;
+    }
+}
+@mixin aspect_ratio_item(){
+    display: block;
+    content: '';
+    padding-top: 50%; //sample
+    @content;
+}
+
+
+/*
+ * example todo code
+ */
+ 
+.ex_wrap_content_body{
+    @include roll_b_list(){
+        // child element
+        @include roll_ib_item();
+        width: 100%;
+        height: 100%;
+    }
+    width: 1024px;
+    height: 400px;
+
+    &.w1024px{
+        @include roll_max_screen(1024px){
+            @include roll_table(cell){
+                @include roll_column();
+                @include roll_t_align('center', 'top');
+            }
+        }
+    }
+}
+.ex_wrap_table{
+    &.row{
+        @include roll_table(row){
+            // child element
+            @include roll_row();
+            @include roll_t_align('center', 'center');
+        }
+   }
+   &.column{
+       @include roll_table(cell){
+            // child element
+            @include roll_column();
+            @include roll_t_align('top', 'left');
+        }
+   }
+   &.home{
+       // todo something here
+       // every part
+       box-sizing: border-box;
+   }
+}
+
+
+@mixin reset_ul_li{
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    font-size: 100%;
+    margin: 0;
+    outline: 0 none;
+    padding: 0;
+    vertical-align: baseline;
+    list-style-type: none;
+}
+
+@mixin roll_flex($direction){
+    @include flexbox();
+    @include flex-direction($direction);
+    >*{
+        @content;
+    }
+}
+
+@mixin roll_i_flex(){
+    @include inline-flex();
+}
+
+// Flexbox Containers
+//
+// The 'flex' value causes an element to generate a block-level flex
+// container box.
+//
+// The 'inline-flex' value causes an element to generate a inline-level
+// flex container box. 
+//
+// display: flex | inline-flex
+//
+// http://w3.org/tr/css3-flexbox/#flex-containers
+//
+// (Placeholder selectors for each type, for those who rather @extend)
+
+@mixin flexbox {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flexbox;
+	display: flex;
+}
+
+@mixin inline-flex {
+	display: -webkit-inline-box;
+	display: -webkit-inline-flex;
+	display: -moz-inline-flex;
+	display: -ms-inline-flexbox;
+	display: inline-flex;
+}
+
+// Flexbox Direction
+//
+// The 'flex-direction' property specifies how flex items are placed in
+// the flex container, by setting the direction of the flex container's
+// main axis. This determines the direction that flex items are laid out in. 
+//
+// Values: row | row-reverse | column | column-reverse
+// Default: row
+//
+// http://w3.org/tr/css3-flexbox/#flex-direction-property
+
+@mixin flex-direction($value: row) {
+	@if $value == row-reverse {
+		-webkit-box-direction: reverse;
+		-webkit-box-orient: horizontal;
+	} @else if $value == column {
+		-webkit-box-direction: normal;
+		-webkit-box-orient: vertical;
+	} @else if $value == column-reverse {
+		-webkit-box-direction: reverse;
+		-webkit-box-orient: vertical;
+	} @else {
+		-webkit-box-direction: normal;
+		-webkit-box-orient: horizontal;
+	}
+	-webkit-flex-direction: $value;
+	-moz-flex-direction: $value;
+	-ms-flex-direction: $value;
+	flex-direction: $value;
+}
+
+// Flexbox Wrap
+//
+// The 'flex-wrap' property controls whether the flex container is single-line
+// or multi-line, and the direction of the cross-axis, which determines
+// the direction new lines are stacked in. 
+//
+// Values: nowrap | wrap | wrap-reverse
+// Default: nowrap
+//
+// http://w3.org/tr/css3-flexbox/#flex-wrap-property
+
+@mixin flex-wrap($value: nowrap) {
+	// No Webkit Box fallback.
+	-webkit-flex-wrap: $value;
+	-moz-flex-wrap: $value;
+	@if $value == nowrap {
+		-ms-flex-wrap: none;
+	} @else { 
+		-ms-flex-wrap: $value; 
+	}
+	flex-wrap: $value;
+}
+
+// Flexbox Flow (shorthand)
+//
+// The 'flex-flow' property is a shorthand for setting the 'flex-direction'
+// and 'flex-wrap' properties, which together define the flex container's
+// main and cross axes.
+//
+// Values: <flex-direction> | <flex-wrap> 
+// Default: row nowrap
+//
+// http://w3.org/tr/css3-flexbox/#flex-flow-property
+
+@mixin flex-flow($values: (row nowrap)) {
+	// No Webkit Box fallback.
+	-webkit-flex-flow: $values;
+	-moz-flex-flow: $values;
+	-ms-flex-flow: $values;
+	flex-flow: $values;
+}
