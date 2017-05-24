@@ -6,7 +6,7 @@
  */
 
 //reset tool for ul li
-@mixin reset_ul_li() {
+@mixin reset-ul-li() {
   background: none repeat scroll 0 0 transparent;
   border: 0 none;
   font-size: 100%;
@@ -17,19 +17,19 @@
   list-style-type: none;
 }
 
-@mixin roll_max_screen($width){
+@mixin roll-max-screen($width){
     @media screen and (max-width: $width) {
         @content;
     }
 }
-@mixin roll_row(){
+@mixin roll-row(){
     display: table-row;
 }
-@mixin roll_column(){
+@mixin roll-column(){
     display: table-cell;
 }
 
-@mixin roll_table($mode){
+@mixin roll-table($mode){
     width: 100%;
     height: auto;
     display: table;
@@ -39,7 +39,7 @@
         @content;
     }
 }
-@mixin roll_t_align($x,$y){
+@mixin roll-t-align($x,$y){
     @if $x == 'center' and $y == 'center'{
         vertical-align: middle;
         text-align: center;
@@ -79,7 +79,7 @@
     
 }
 
-@mixin roll_b_list(){
+@mixin roll-b-list(){
     display: block;
     width: 100%;
     height: auto;
@@ -93,7 +93,7 @@
     }
 }
 
-@mixin roll_b_align($x){
+@mixin roll-b-align($x){
     @if $x == 'center' {
         margin: 0 auto;
     }
@@ -107,19 +107,19 @@
     }
 }
 
-@mixin roll_b_item(){
+@mixin roll-b-item(){
     display: block;
     width: 100px;
     height: auto;
     
 }
-@mixin roll_ib_item(){
+@mixin roll-ib-item(){
     display: inline-block;
     width: 100px;
     height: auto;
 }
 
-@mixin roll_img(){
+@mixin roll-img(){
     display: block;
     box-sizing: border-box;
     width: 50px;
@@ -132,7 +132,7 @@
     }
 }
 
-@mixin roll_img_item(){
+@mixin roll-img-item(){
     width: 100%;
     height: 100%;
     position: absolute;
@@ -148,14 +148,14 @@
 
 //NEW VERSION OBJECT ASPECT RATIO
 //BUTUH REQUIREMENT CHILDREN ABSOLUTE LAYOUT
-@mixin aspect_ratio(){
+@mixin aspect-ratio(){
     display: inline-block;
     position: relative;
     &:after{
         @content;
     }
 }
-@mixin aspect_ratio_item(){
+@mixin aspect-ratio-item(){
     display: block;
     content: '';
     padding-top: 50%; //sample
@@ -167,10 +167,10 @@
  * example todo code
  */
  
-.ex_wrap_content_body{
-    @include roll_b_list(){
+.ex-wrap-content-body{
+    @include roll-b-list(){
         // child element
-        @include roll_ib_item();
+        @include roll-ib-item();
         width: 100%;
         height: 100%;
     }
@@ -178,27 +178,27 @@
     height: 400px;
 
     &.w1024px{
-        @include roll_max_screen(1024px){
-            @include roll_table(cell){
-                @include roll_column();
-                @include roll_t_align('center', 'top');
+        @include roll-max-screen(1024px){
+            @include roll-table(cell){
+                @include roll-column();
+                @include roll-t-align('center', 'top');
             }
         }
     }
 }
-.ex_wrap_table{
+.ex-wrap-table{
     &.row{
-        @include roll_table(row){
+        @include roll-table(row){
             // child element
-            @include roll_row();
-            @include roll_t_align('center', 'center');
+            @include roll-row();
+            @include roll-t-align('center', 'center');
         }
    }
    &.column{
-       @include roll_table(cell){
+       @include roll-table(cell){
             // child element
-            @include roll_column();
-            @include roll_t_align('top', 'left');
+            @include roll-column();
+            @include roll-t-align('top', 'left');
         }
    }
    &.home{
@@ -209,7 +209,7 @@
 }
 
 
-@mixin reset_ul_li{
+@mixin reset-ul-li{
     background: none repeat scroll 0 0 transparent;
     border: 0 none;
     font-size: 100%;
@@ -220,7 +220,7 @@
     list-style-type: none;
 }
 
-@mixin roll_flex($direction){
+@mixin roll-flex($direction){
     @include flexbox();
     @include flex-direction($direction);
     >*{
@@ -228,7 +228,7 @@
     }
 }
 
-@mixin roll_i_flex(){
+@mixin roll-i-flex(){
     @include inline-flex();
 }
 
